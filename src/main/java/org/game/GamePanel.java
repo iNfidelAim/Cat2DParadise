@@ -1,5 +1,7 @@
 package org.game;
 
+import org.game.entity.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +11,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;  //16x16 tile (плитка, NPC, персонаж и т.д.)
     final int scale = 3;
 
-    final int tileSize = originalTileSize * scale; //масштабирование 48х48
+    public final int tileSize = originalTileSize * scale; //масштабирование 48х48
     final int maxScreenCol = 32;
     final int maxScreenRow = 20;
     final int screenWidth = tileSize * maxScreenCol; // 48 * 16 =  1 536 pixels
@@ -20,6 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
+    Player player = new Player(this, keyH);
 
     //set default player position
     int playerX = 100;
@@ -72,16 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
     public void update() {
-
-        if(keyH.upPressed == true) {
-            playerY -= playerSpeed;
-        } else if(keyH.downPressed == true)  {
-            playerY += playerSpeed;
-        } else if (keyH.leftPressed == true) {
-            playerX -= playerSpeed;
-        } else if (keyH.rightPressed == true) {
-            playerX += playerSpeed;
-        }
+        player.update();
     }
 
     public void paintComponent(Graphics g) {
@@ -89,8 +83,9 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.blue);
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
+
+        player.draw(g2);
+
         g2.dispose();
     }
 }
