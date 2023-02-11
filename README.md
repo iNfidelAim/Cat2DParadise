@@ -1,4 +1,4 @@
-# Cat2DParadise
+# Cat2DParadise (название пока рабочее)
 Game adventure of cat after life
 
 
