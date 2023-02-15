@@ -1,6 +1,7 @@
 package org.game;
 
 import org.game.entity.Player;
+import org.game.object.SuperObject;
 import org.game.tile.TileManager;
 
 import javax.swing.*;
@@ -13,14 +14,14 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; //масштабирование 48х48
-    public final int maxScreenCol = 32;
-    public final int maxScreenRow = 20;
+    public final int maxScreenCol = 32; //32
+    public final int maxScreenRow = 20; //20
     public final int screenWidth = tileSize * maxScreenCol; // 48 * 16 =  1 536 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 48  * 20 = 960 pixels
 
     //WOLRD SETTINGS
-    public final int maxWorldCol = 62;
-    public final int maxWorldRow = 62;
+    public final int maxWorldCol = 64;
+    public final int maxWorldRow = 79;
     public final int worldWidth = tileSize * maxScreenCol;
     public final int worldHeight = tileSize * maxScreenRow;
 
@@ -32,7 +33,9 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
+    public SuperObject obj[] = new SuperObject[10];
 
 
     public GamePanel() {
@@ -41,6 +44,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+    }
+
+    public void setupGame() {
+
+       aSetter.setObject();
     }
 
     public void startGameThread() {
@@ -84,12 +92,20 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void paintComponent(Graphics g) {
-
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D)g;
 
+        //Tile
         tileM.draw(g2);
+
+        //Object
+        for (int i = 0; i < obj.length; i++) {
+            if(obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
+
+        //Player
         player.draw(g2);
 
         g2.dispose();

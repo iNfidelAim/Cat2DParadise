@@ -15,6 +15,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    int hasKey = 0;
 
 
     public Player(GamePanel gp, KeyHandler keyH) {
@@ -26,9 +27,11 @@ public class Player extends Entity {
 
         solidArea = new Rectangle();
         solidArea.x = 10;
-        solidArea.y = 20;
+        solidArea.y = 15;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 24;
-        solidArea.height = 32;
+        solidArea.height = 20;
 
 
 
@@ -82,6 +85,10 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            //Check object collision
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
+
             //if collision is false, player can move
             if(collisionOn == false) {
                 switch (direction) {
@@ -103,6 +110,32 @@ public class Player extends Entity {
         }
     }
 
+
+    public void pickUpObject(int i) {
+
+        if(i != 999) {
+
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+                case "Key":
+                    hasKey++;
+                    gp.obj[i] = null;
+                    break;
+                case "Door":
+                    if(hasKey > 0) {
+                        gp.obj[i] = null;
+                        hasKey--;
+                    }
+                    break;
+                case "Wings":
+                    speed += 1;
+                    gp.obj[i] = null;
+                    break;
+            }
+        }
+    }
+
     public void draw(Graphics2D g2) {
      /*   g2.setColor(Color.blue);
         g2.fillRect(x, y, gp.tileSize, gp.tileSize);*/
@@ -110,7 +143,7 @@ public class Player extends Entity {
 
         BufferedImage image = null;
 
-        switch(direction) {
+        switch (direction) {
             case "up":
                 if(spriteNum == 1) image = up1;
                 if(spriteNum == 2)  image = upMid;
