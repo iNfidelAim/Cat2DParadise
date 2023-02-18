@@ -1,4 +1,4 @@
-package org.game;
+package org.game.main;
 
 import org.game.entity.Player;
 import org.game.object.SuperObject;
@@ -99,6 +99,12 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
+        //Debug function (time)
+        long drawStart = 0;
+        if(keyH.checkDrawTime == true) {
+            drawStart = System.nanoTime();
+        }
+
         //Tile
         tileM.draw(g2);
 
@@ -114,6 +120,16 @@ public class GamePanel extends JPanel implements Runnable {
 
         //UI
         ui.draw(g2);
+
+        //debug
+        if(keyH.checkDrawTime == true) {
+            long drawEnd = System.nanoTime();
+            long passed = drawEnd - drawStart;
+            g2.setColor(Color.WHITE);
+            g2.drawString("Draw time: " + passed, 10, 400);
+            System.out.println("Draw time: " + passed);
+        }
+
 
         g2.dispose();
     }
