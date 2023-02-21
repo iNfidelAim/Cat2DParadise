@@ -14,6 +14,7 @@ public class NPC_Dog extends Entity {
         speed = 1;
 
         getImage();
+        setDialogue();
     }
     public void getImage() {
 
@@ -29,6 +30,15 @@ public class NPC_Dog extends Entity {
         right1 = setup("/npc/dog");
         rightMid = setup("/npc/dog");
         right2 = setup("/npc/dog");
+    }
+
+    public void setDialogue() {
+
+        dialogues[0] = "Who like the dog said?";
+        dialogues[1] = "Gav gav gav Gav gav gav Gav gav gav Gav gav gav Gav gav gav Gav \n gav gav Gav gav gav Gav gav gav";
+        dialogues[2] = "Hello, Barsik";
+        dialogues[3] = "gav gav, Barsik, gav gav";
+
     }
 
     @Override
@@ -54,5 +64,9 @@ public class NPC_Dog extends Entity {
             }
             actionLockCounter = 0;
         }
+    }
+    public void speak() {
+        //This method for specific character stuff
+        super.speak();
     }
 }

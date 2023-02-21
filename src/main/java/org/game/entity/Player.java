@@ -2,12 +2,10 @@ package org.game.entity;
 
 import org.game.main.GamePanel;
 import org.game.main.KeyHandler;
-import org.game.main.UtilityTool;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+
 
 public class Player extends Entity {
 
@@ -125,8 +123,13 @@ public class Player extends Entity {
 
     public void interactNPC(int i) {
         if(i != 999) {
-            System.out.println("COLLLISSSSIION in NPC");
+
+             if(gp.keyH.enterPressed == true) {
+                 gp.gameState = gp.dialogueState;
+                 gp.npc[i].speak();
+             }
         }
+        gp.keyH.enterPressed = false;
     }
 
 
