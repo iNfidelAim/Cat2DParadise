@@ -16,7 +16,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0;
+ // public int hasKey = 0;
     int standCounter = 0;
 
 
@@ -133,37 +133,7 @@ public class Player extends Entity {
 
         if(i != 999) {
 
-            String objectName = gp.obj[i].name;
 
-            switch (objectName) {
-                case "Key":
-                    gp.playSE(1);
-                    hasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("Ты подобрал ключ!");
-                    break;
-                case "Door":
-                    gp.playSE(1);
-                    if(hasKey > 0) {
-                        gp.obj[i] = null;
-                        hasKey--;
-                        gp.ui.showMessage("Дверь открыта!");
-                    } else {
-                        gp.ui.showMessage("Барсик, тебе нужен ключ!");
-                    }
-                    break;
-                case "Wings":
-                    gp.playSE(1);
-                    speed += 1;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("Крылья дают тебе скорость!");
-                    break;
-                case "Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(2);
-                    break;
-            }
         }
     }
 
