@@ -1,6 +1,6 @@
 package org.game.main;
 
-
+import org.game.entity.NPC_Dog;
 
 public class AssetSetter {
 
@@ -12,8 +12,11 @@ public class AssetSetter {
 
    public void setObject() {
 
-
     }
-
+    public void setNPC() {
+        gp.npc[0] = new NPC_Dog(gp);
+        gp.npc[0].worldX = gp.tileSize*21;
+        gp.npc[0].worldY = gp.tileSize*21;
+    }
 
 }
