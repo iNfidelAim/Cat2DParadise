@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     //System
     TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
-    Sound music  = new Sound();
+    Sound music = new Sound();
     Sound soundEffect = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
+    public Entity monsters[] = new Entity[20];
     ArrayList<Entity> entityList = new ArrayList<>();
 
 
@@ -52,8 +53,6 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
-
-
 
 
     public GamePanel() {
@@ -66,10 +65,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
 
-       aSetter.setObject();
-       aSetter.setNPC();
-     //  playMusic(0);
-       gameState = titleState;
+        aSetter.setObject();
+        aSetter.setNPC();
+        aSetter.setMonsters();
+        //  playMusic(0);
+        gameState = titleState;
     }
 
     public void startGameThread() {
@@ -95,7 +95,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime/1_000_000;
+                remainingTime = remainingTime / 1_000_000;
 
                 if (remainingTime < 0) remainingTime = 0;
 
@@ -108,33 +108,39 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
     }
+
     public void update() {
 
 
-        if(gameState == playState) {
+        if (gameState == playState) {
             //PLAYER
             player.update();
             //NPC
             for (int i = 0; i < npc.length; i++) {
-                if(npc[i] != null) {
-                    npc[i].update();
+                if (npc[i] != null) { npc[i].update(); }
+            }
+            for (int i = 0; i < monsters.length; i++) {
+                if (monsters[i] != null) {
+                    monsters[i].update();
                 }
             }
         }
-        if(gameState == pauseState) { //nothing
+        if (gameState == pauseState) { //nothing
         }
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
         //Debug function (time)
         long drawStart = 0;
-        if(keyH.checkDrawTime == true) { drawStart = System.nanoTime(); }
+        if (keyH.checkDrawTime == true) {
+            drawStart = System.nanoTime();
+        }
 
         //TITLE SCREEN
-        if(gameState == titleState) {
+        if (gameState == titleState) {
             ui.draw(g2);
         }
 
@@ -146,11 +152,19 @@ public class GamePanel extends JPanel implements Runnable {
             //ADD ENTITIES TO THE LIST
             entityList.add(player);
             for (int i = 0; i < npc.length; i++) {
-                if(npc[i] != null) { entityList.add(npc[i]); }
-                }
+                if (npc[i] != null) { entityList.add(npc[i]); }
             }
 
-            //SORT(для отприсовки либо сверху NPC либо снизу в зависимости от индекса
+            for (int i = 0; i < obj.length; i++) {
+                    if (obj[i] != null) { entityList.add(obj[i]); }
+            }
+
+            for (int i = 0; i < monsters.length; i++) {
+                        if (monsters[i] != null) { entityList.add(monsters[i]); }
+            }
+        }
+
+        //SORT(для отприсовки либо сверху NPC либо снизу в зависимости от индекса
         Collections.sort(entityList, new Comparator<Entity>() {
             @Override
             public int compare(Entity e1, Entity e2) {
@@ -170,17 +184,18 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
 
-
-        for (int i = 0; i < obj.length; i++) { if(obj[i] != null) { entityList.add(obj[i]); }
+        for (int i = 0; i < obj.length; i++) {
+            if (obj[i] != null) {
+                entityList.add(obj[i]);
+            }
         }
 
-            //UI
-            ui.draw(g2);
-        }
+        //UI
+        ui.draw(g2);
 
 
         //DEBUG
-        if(keyH.checkDrawTime == true) {
+        if (keyH.checkDrawTime == true) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
             g2.setColor(Color.WHITE);
@@ -190,7 +205,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         g2.dispose();
-    }
+
+}
     public void playMusic(int i) {
         music.setFIle(i);
         music.play();
