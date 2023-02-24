@@ -25,12 +25,12 @@ public class Player extends Entity {
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
         solidArea = new Rectangle();
-        solidArea.x = 10;
-        solidArea.y = 15;
+        solidArea.x = 10; //10
+        solidArea.y = 15; //15
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 24;
-        solidArea.height = 20;
+        solidArea.width = 24; //24
+        solidArea.height = 20; //20
 
 
 
@@ -94,6 +94,7 @@ public class Player extends Entity {
 
             //CHECK MONSTER COLLISION
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monsters);
+            contactMonster(monsterIndex);
 
 
             //CHECK EVENT
@@ -125,6 +126,13 @@ public class Player extends Entity {
                  standCounter = 0;
              }
         }
+        if(invincible == true) {
+            invincibleCounter++;
+            if(invincibleCounter > 60) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
 
 
@@ -144,6 +152,15 @@ public class Player extends Entity {
         }
     }
 
+    public void contactMonster(int i) {
+
+        if (i != 999) {
+            if (invincible == false) {
+                life -= 1;
+                invincible = true;
+            }
+        }
+    }
 
     public void draw(Graphics2D g2) {
      /*   g2.setColor(Color.blue);
@@ -174,12 +191,17 @@ public class Player extends Entity {
                 if(spriteNum == 3)  image = right2;
                 break;
         }
+
+        if(invincible == true) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3F));
+
+        }
+
         g2.drawImage(image, screenX, screenY,null);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1F));
 
 
     }
-
-
 }
 
 

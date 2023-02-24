@@ -13,15 +13,16 @@ public class MON_TestMonster extends Entity {
     public MON_TestMonster(GamePanel gp) {
                 super(gp);
 
+                type = 2;
                 name = "test_monster";
                 speed = 1;
                 maxLife = 4;
                 life = maxLife;
 
-                solidArea.x = 3;
-                solidArea.y = 18;
-                solidArea.width = 42;
-                solidArea.height = 30;
+                solidArea.x = 0;
+                solidArea.y = 0;
+                solidArea.width = 48;
+                solidArea.height = 48;
                 solidAreaDefaultX = solidArea.x;
                 solidAreaDefaultY = solidArea.y;
 
