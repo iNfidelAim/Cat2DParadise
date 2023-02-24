@@ -10,11 +10,12 @@ public class NPC_Dog extends Entity {
     public NPC_Dog(GamePanel gp) {
         super(gp);
 
-        direction = "down";
+        name = "Dog";
         speed = 1;
-
         getImage();
         setDialogue();
+
+
     }
     public void getImage() {
 

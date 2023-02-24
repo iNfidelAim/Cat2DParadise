@@ -17,27 +17,26 @@ public class AssetSetter {
 
     public void setNPC() {
         gp.npc[0] = new NPC_Dog(gp);
-        gp.npc[0].worldX = gp.tileSize * 21;
-        gp.npc[0].worldY = gp.tileSize * 21;
+        gp.npc[0].worldX = gp.tileSize * 20;
+        gp.npc[0].worldY = gp.tileSize * 20;
 
         gp.npc[1] = new NPC_Dog(gp);
-        gp.npc[1].worldX = gp.tileSize * 35;
+        gp.npc[1].worldX = gp.tileSize * 22;
         gp.npc[1].worldY = gp.tileSize * 22;
 
         gp.npc[2] = new NPC_Dog(gp);
-        gp.npc[2].worldX = gp.tileSize * 35;
-        gp.npc[2].worldY = gp.tileSize * 35;
+        gp.npc[2].worldX = gp.tileSize * 25;
+        gp.npc[2].worldY = gp.tileSize * 25;
+
 
     }
 
     public void setMonsters() {
         gp.npc[0] = new MON_TestMonster(gp);
-        gp.npc[0].worldX = gp.tileSize * 42;
-        gp.npc[0].worldY = gp.tileSize * 42;
+        gp.npc[0].worldX = gp.tileSize * 35;
+        gp.npc[0].worldY = gp.tileSize * 40;
 
-        gp.npc[1] = new MON_TestMonster(gp);
-        gp.npc[1].worldX = gp.tileSize * 10;
-        gp.npc[1].worldY = gp.tileSize * 10;
+
 
     }
 }

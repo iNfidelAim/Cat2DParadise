@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
     public EventHandler eHandler = new EventHandler(this);
     Thread gameThread;
 
-    //Entity and object
+    //ENTITY AND OBJECT
     public Player player = new Player(this, keyH);
     public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
@@ -120,13 +120,10 @@ public class GamePanel extends JPanel implements Runnable {
                 if (npc[i] != null) { npc[i].update(); }
             }
             for (int i = 0; i < monsters.length; i++) {
-                if (monsters[i] != null) {
-                    monsters[i].update();
-                }
+                if (monsters[i] != null) { monsters[i].update(); }
             }
         }
-        if (gameState == pauseState) { //nothing
-        }
+        if (gameState == pauseState) { /*nothing*/ }
     }
 
     public void paintComponent(Graphics g) {

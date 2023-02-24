@@ -14,15 +14,14 @@ public class MON_TestMonster extends Entity {
                 super(gp);
 
                 name = "test_monster";
-                direction = "down";
                 speed = 1;
                 maxLife = 4;
                 life = maxLife;
 
                 solidArea.x = 3;
-                solidArea.y = 10;
-                solidArea.width = 45;
-                solidArea.height = 38;
+                solidArea.y = 18;
+                solidArea.width = 42;
+                solidArea.height = 30;
                 solidAreaDefaultX = solidArea.x;
                 solidAreaDefaultY = solidArea.y;
 
@@ -57,18 +56,10 @@ public class MON_TestMonster extends Entity {
                 Random random = new Random();
                 int i = random.nextInt(100) + 1; //pick up number from 1 to 100
 
-                if( i <= 25) {
-                    direction = "up";
-                }
-                if( i > 25 && i <=50) {
-                    direction = "down";
-                }
-                if( i > 50 && i <= 75) {
-                    direction = "left";
-                }
-                if(i > 75) {
-                    direction = "right";
-                }
+                if( i <= 25) { direction = "up"; }
+                if( i > 25 && i <=50) { direction = "down"; }
+                if( i > 50 && i <= 75) { direction = "left"; }
+                if(i > 75) { direction = "right"; }
                 actionLockCounter = 0;
             }
         }
