@@ -1,8 +1,8 @@
 package org.game.main;
 
 
+import org.game.entity.Entity;
 import org.game.object.OBJ_Heart;
-import org.game.object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,7 +36,7 @@ public class UI {
         }
 
         //CREATE HUT OBJ
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;

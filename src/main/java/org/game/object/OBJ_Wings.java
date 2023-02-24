@@ -1,23 +1,16 @@
 package org.game.object;
 
+import org.game.entity.Entity;
 import org.game.main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
 
-public class OBJ_Wings extends SuperObject{
+public class OBJ_Wings extends Entity {
 
-    GamePanel gp;
     public OBJ_Wings(GamePanel gp) {
-        this.gp = gp;
+
+        super(gp);
         name = "Wings";
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/objects/wings.png"));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        down1 = setup("/objects/wings");
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
-
 }
