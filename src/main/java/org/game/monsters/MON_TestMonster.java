@@ -43,6 +43,10 @@ public class MON_TestMonster extends Entity {
             right1 = setup("/monsters/test_monster2");
             rightMid = setup("/monsters/test_monster1");
             right2 = setup("/monsters/test_monster2");
+
+
+
+
         }
 
 

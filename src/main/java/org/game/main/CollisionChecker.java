@@ -80,8 +80,12 @@ public class CollisionChecker {
                     }
 
                     if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-                    if (gp.obj[i].collision == true) { entity.collisionOn = true; }
-                    if (player == true) { index = i; }
+                    if (gp.obj[i].collision == true) {
+                        entity.collisionOn = true;
+                    }
+                    if (player == true) {
+                        index = i;
+                    }
                 }
 
 

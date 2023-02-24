@@ -154,8 +154,8 @@ public class Player extends Entity {
 
     public void contactMonster(int i) {
 
-        if (i != 999) {
-            if (invincible == false) {
+        if(i != 999) {
+           if(invincible == false) {
                 life -= 1;
                 invincible = true;
             }
@@ -193,7 +193,7 @@ public class Player extends Entity {
         }
 
         if(invincible == true) {
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3F));
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0F));
 
         }
 
